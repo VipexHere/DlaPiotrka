@@ -2,12 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame ()
+    [SerializeField] private Button startGameButton;
+    [SerializeField] private string gameSceneName;
+
+    private void Awake()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        startGameButton.onClick.AddListener(PlayGame);
+    }
+
+    private void PlayGame ()
+    {
+        LoadSceneManager.instance.LoadScene(gameSceneName); 
     }
 
     public void QuitGame ()
@@ -15,5 +26,4 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Exit!");
         Application.Quit();
     }
-
 }
